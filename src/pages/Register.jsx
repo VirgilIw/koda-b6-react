@@ -128,8 +128,8 @@ export default function Register() {
       </section>
 
       {/* RIGHT */}
-      <section className="flex min-h-screen items-center justify-center px-6 pt-10 lg:mx-20">
-        <div className="w-full space-y-4 px-2 lg:max-w-lvh lg:min-w-full">
+      <section className="flex lg:h-screen items-center justify-center px-6 pt-2 lg:mx-20">
+        <div className="w-full space-y-4 px-2 lg:min-w-full">
           {/* Header */}
           <div>
             <img src={cs} alt="Coffee shop" className="mt-10 lg:mt-0" />
