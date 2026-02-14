@@ -1,10 +1,19 @@
 import React from "react";
 import cs from "../../assets/navbar/coffe.svg";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 
 export default function Navbar() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
-    <section className="fixed top-0 z-50 w-full bg-black/40 text-white backdrop-blur-md">
+    <section
+      className={`fixed top-0 z-50 w-full backdrop-blur-md transition-colors duration-300 ${
+        isHome
+          ? "bg-black/40 text-white"
+          : "bg-black text-white"
+      }`}
+    >
       <div className="flex flex-col gap-4 px-4 py-3 lg:grid lg:grid-cols-2 lg:px-20 lg:py-5">
 
         {/* LEFT SIDE */}
@@ -15,7 +24,7 @@ export default function Navbar() {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `pb-1 cursor-pointer ${
+                `px-2 pb-1 cursor-pointer ${
                   isActive ? "border-b-2 border-orange-400" : ""
                 }`
               }
@@ -26,7 +35,7 @@ export default function Navbar() {
             <NavLink
               to="/product"
               className={({ isActive }) =>
-                `pb-1 cursor-pointer ${
+                `px-2 pb-1 cursor-pointer ${
                   isActive ? "border-b-2 border-orange-400" : ""
                 }`
               }
@@ -40,7 +49,7 @@ export default function Navbar() {
         <div className="flex items-center justify-center lg:justify-end gap-4">
           <NavLink
             to="/login"
-            className="rounded-md border border-white px-4 py-2 transition duration-200 hover:scale-105 hover:bg-white hover:text-black"
+            className="rounded-md border border-current px-4 py-2 transition duration-200 hover:scale-105 hover:bg-white hover:text-black"
           >
             Sign In
           </NavLink>
