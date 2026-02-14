@@ -4,7 +4,7 @@ import EyeClose from "../components/auth/EyeClose";
 import EyeOpen from "../components/auth/EyeOpen";
 import Mail from "../assets/auth/mail.svg";
 import Password from "../assets/auth/password.svg";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import React from "react";
 import MediaAuth from "../components/auth/MediaAuth";
 
@@ -14,6 +14,8 @@ export const Login = () => {
     email: "",
     password: "",
   });
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const navigate = useNavigate();
 
   const handleEye = () => {
     setOpenEye(!openEye);
@@ -21,8 +23,33 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      if (form.password === "" || form.email === "") {
+        setErrorMessage("Email and password cannot be empty");
+        return;
+      }
+      // ambil dan ubah dari string → array
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      const isLoginValid = users.some(
+        (user) => user.email === form.email && user.password === form.password,
+      );
+
+      if (!isLoginValid) {
+        setErrorMessage("Email or password incorrect");
+        return;
+      }
+      setErrorMessage("");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
-  
+
+  React.useEffect(() => {
+    localStorage.getItem("users");
+  }, []);
   return (
     <div className="lg:grid lg:grid-cols-[25%_75%]">
       {/* LEFT */}
@@ -115,7 +142,12 @@ export const Login = () => {
             </div>
 
             {/* Forgot */}
-            <div className="my-4 flex justify-end lg:my-6 lg:flex lg:justify-end">
+            <div className="my-4 flex items-center justify-between lg:my-6 lg:flex lg:justify-end">
+              {errorMessage ? (
+                <p className="text-sm text-red-500">{errorMessage}</p>
+              ) : (
+                <div />
+              )}
               <Link to="/forgot-password" className="text-sm text-orange-400">
                 Lupa Password?
               </Link>
