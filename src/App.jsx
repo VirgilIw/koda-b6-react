@@ -5,10 +5,26 @@ import store, { persistedStore } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import RegisterProvider from "./contexts/register/RegisterProvider";
-import HomeLayout from "./layout/HomeLayout";
 import Home from "./pages/Home";
+import Product from "./pages/Product";
+import MainLayout from "./layout/MainLayout";
+
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "product",
+        element: <Product />,
+      },
+    ],
+  },
   {
     path: "/login",
     element: <Login />,
@@ -17,17 +33,8 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
-  {
-    path: "/",
-    element: <HomeLayout />,
-    children: [
-      {
-        index: true, // akan ditampilkan outlet
-        element: <Home />,
-      },
-    ],
-  },
 ]);
+
 
 const App = () => {
   return (
