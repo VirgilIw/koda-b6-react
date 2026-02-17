@@ -112,7 +112,7 @@ export default function MenuProduct() {
       ) : (
         <div className="grid grid-cols-2 gap-4">
           {currentProducts.map((item) => (
-            <div key={item.id} className="h-[75vh]">
+            <div key={item.id} className="h-[80vh]">
               <div>
                 <img
                   src={item.image}
@@ -162,7 +162,7 @@ export default function MenuProduct() {
 
       {/* PAGINATION */}
       {totalPages > 1 && (
-        <div className="flex justify-center pb-10">
+        <div className="flex justify-center pb-10 mt-15">
           <Pagination
             page={page}
             setPage={handlePageChange}
