@@ -1,10 +1,13 @@
 import React from "react";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import useFetch from "../../hooks/useFetch";
 import Pagination from "./Pagination";
+import Star from "../../assets/home/Star.svg";
+import Shoppingcart from "../../assets/product/ShoppingCart.svg";
 
 export default function MenuProduct() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   // Ambil semua params dari URL
   const page = Number(searchParams.get("page")) || 1;
@@ -22,7 +25,7 @@ export default function MenuProduct() {
 
   // 1. COPY DATA
   let products = [...data.products];
-
+  console.log(products);
   // 2. FILTER SEARCH
   if (search) {
     products = products.filter((p) =>
@@ -77,7 +80,7 @@ export default function MenuProduct() {
     <div className="space-y-8">
       {/* INFO FILTER AKTIF */}
       {(search || categories.length > 0 || sort) && (
-        <div className="flex items-center flex-wrap gap-2 text-sm text-gray-600">
+        <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
           {search && (
             <span className="rounded-full bg-orange-100 px-3 py-1 text-orange-700">
               Search: "{search}"
@@ -109,17 +112,49 @@ export default function MenuProduct() {
       ) : (
         <div className="grid grid-cols-2 gap-4">
           {currentProducts.map((item) => (
-            <div key={item.id}>
-              <img
-                src={item.image}
-                alt={item.name}
-                className="h-96 w-full rounded-lg object-cover"
-              />
-              <p className="mt-2 font-semibold">{item.name}</p>
-              <p className="text-sm text-gray-500">
-                Rp {item.price.toLocaleString("id-ID")}
-              </p>
-              <p>{item.rating}</p>
+            <div key={item.id} className="h-[75vh]">
+              <div>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="h-96 w-full rounded-lg object-cover"
+                />
+              </div>
+              <div className="relative bottom-20 left-8 w-[26vw] rounded-md bg-white p-4">
+                <p className="mt-2 text-3xl font-semibold">{item.name}</p>
+                <p className="mt-2 justify-center">{item.description}</p>
+                <div className="flex items-center gap-2">
+                  {[1, 2, 3, 4, 5].map((item, id) => {
+                    return (
+                      <div key={id}>
+                        <img src={Star} alt="bintang" />
+                      </div>
+                    );
+                  })}
+                  <p>{item.rating}</p>
+                </div>
+                <div className="flex gap-2">
+                  <p className="text-red-400 line-through">
+                    {item.price >= 25000 ? "IDR 30000" : "IDR 25000"}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Rp {item.price.toLocaleString("id-ID")}
+                  </p>
+                </div>
+                <div className="mt-2 grid grid-cols-[80%_20%]">
+                  <button
+                    className="rounded bg-orange-400 py-2 hover:bg-orange-500 hover:text-white"
+                    onClick={() => {
+                      navigate(`/product/${item.id}`);
+                    }}
+                  >
+                    Buy
+                  </button>
+                  <button className="ml-4 flex justify-center rounded border border-orange-400">
+                    <img src={Shoppingcart} alt="cart" />
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>
