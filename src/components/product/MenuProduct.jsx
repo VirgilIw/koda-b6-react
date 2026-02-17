@@ -112,7 +112,7 @@ export default function MenuProduct() {
       ) : (
         <div className="grid grid-cols-2 gap-4">
           {currentProducts.map((item) => (
-            <div key={item.id} className="h-[80vh]">
+            <div key={item.id} className=" h-135">
               <div>
                 <img
                   src={item.image}
@@ -120,9 +120,9 @@ export default function MenuProduct() {
                   className="h-96 w-full rounded-lg object-cover"
                 />
               </div>
-              <div className="relative bottom-20 left-8 w-[26vw] rounded-md bg-white p-4">
+              <div className="relative bottom-20 left-8 w-[26vw] rounded-md bg-white py-4 px-4">
                 <p className="mt-2 text-3xl font-semibold">{item.name}</p>
-                <p className="mt-2 justify-center">{item.description}</p>
+                <p className="mt-2 justify-center line-clamp-2">{item.description}</p>
                 <div className="flex items-center gap-2">
                   {[1, 2, 3, 4, 5].map((item, id) => {
                     return (
@@ -162,7 +162,7 @@ export default function MenuProduct() {
 
       {/* PAGINATION */}
       {totalPages > 1 && (
-        <div className="flex justify-center pb-10 mt-15">
+        <div className="mt-10 flex justify-center pb-10">
           <Pagination
             page={page}
             setPage={handlePageChange}
