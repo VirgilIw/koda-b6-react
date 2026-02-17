@@ -10,6 +10,7 @@ import Product from "./pages/Product";
 import MainLayout from "./layout/MainLayout";
 import DetailProduct from "./pages/DetailProduct";
 import Error from "./pages/Error";
+import CheckoutProduct from "./pages/CheckoutProduct";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "product/:id",
         element: <DetailProduct />,
+      },
+      {
+        path: "checkout-product/:id",
+        element: <CheckoutProduct />,
       },
       {
         path: "*",
