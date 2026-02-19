@@ -1,9 +1,10 @@
 import React from "react";
 
-export default function CardCheckout({ qty, product, size, temperature }) {
+export default function CardCheckout({ qty, product, size, temperature,formData }) {
+
   return (
     <>
-      <section className="mt-4 grid grid-cols-[30%_50%_20%] h-60 rounded-lg bg-gray-50 p-3">
+      <section className="mt-4 grid h-60 grid-cols-[30%_50%_20%] rounded-lg bg-gray-50 p-3">
         <img
           src={product.image}
           alt={product.name}
@@ -11,17 +12,19 @@ export default function CardCheckout({ qty, product, size, temperature }) {
         />
 
         <div className="flex flex-col justify-center">
-          <p className="px-3 font-semibold">{product.name}</p>
+          <p className="px-3 text-2xl font-semibold">{product.name}</p>
 
-          <div className="flex items-center divide-x text-sm text-gray-500">
+          <div className="flex items-center divide-x py-2 text-sm text-gray-500">
             <p className="px-3">{qty} pcs</p>
             <p className="px-3">{size}</p>
             <p className="px-3">{temperature}</p>
-            <p className="px-3">Dine in</p>
+            <p className="px-3">{formData}</p>
           </div>
-          <div>
-            <p>test</p>
-            <p></p>
+          <div className="flex items-center gap-2 px-3 py-2">
+            <p className="text-red-400 line-through">
+              {product.price >= 25000 ? "IDR 30000" : "IDR 25000"}
+            </p>
+            <p className="text-2xl text-orange-400">IDR. {product.price}</p>
           </div>
         </div>
 
