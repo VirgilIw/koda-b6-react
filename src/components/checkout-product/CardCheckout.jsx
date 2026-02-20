@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CardCheckout({ qty, product, size, temperature,formData }) {
+export default function CardCheckout({ qty, product, size, temperature,delivery }) {
 
   return (
     <>
@@ -18,7 +18,7 @@ export default function CardCheckout({ qty, product, size, temperature,formData 
             <p className="px-3">{qty} pcs</p>
             <p className="px-3">{size}</p>
             <p className="px-3">{temperature}</p>
-            <p className="px-3">{formData}</p>
+            <p className="px-3">{delivery}</p>
           </div>
           <div className="flex items-center gap-2 px-3 py-2">
             <p className="text-red-400 line-through">
