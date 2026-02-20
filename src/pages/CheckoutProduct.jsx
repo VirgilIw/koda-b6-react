@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useSearchParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import useFetch from "../hooks/useFetch";
 import CardCheckout from "../components/checkout-product/CardCheckout";
 import PaymentType from "../components/checkout-product/PaymentType";
@@ -14,6 +14,7 @@ export default function CheckoutProduct() {
   const data = useFetch("/product.json");
   const [show, setShow] = React.useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [formData, setFormData] = React.useState({
     email: "",
@@ -70,6 +71,7 @@ export default function CheckoutProduct() {
 
     dispatch(addOrder(checkoutData));
     console.log("Checkout Data:", checkoutData);
+    navigate("/history-order")
   };
 
   return (
