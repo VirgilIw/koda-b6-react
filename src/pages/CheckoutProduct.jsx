@@ -13,7 +13,7 @@ export default function CheckoutProduct() {
   const { id } = useParams();
   const data = useFetch("/product.json");
   const [show, setShow] = React.useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = React.useState({
     email: "",
@@ -40,19 +40,35 @@ export default function CheckoutProduct() {
   const order = qty * product.price;
   const subtotal = order + tax;
 
-
   const handleCheckout = (e) => {
     e.preventDefault();
 
+    const timestamp = Date.now().toString().slice(-4);
+    const random = Math.floor(10000 + Math.random() * 90000);
+    const orderId = `${timestamp}-${random}`;
+
+    const formattedDate = new Date().toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+
     const checkoutData = {
-      product,
-      qty,
-      size,
-      temperature,
-      formData,
+      orderId,
+      items: [
+        {
+          product,
+          qty,
+          size,
+          temperature,
+        },
+      ],
       subtotal,
+      createdAt: formattedDate,
+      status: "On Progress",
     };
-    dispatch(addOrder(checkoutData))
+
+    dispatch(addOrder(checkoutData));
     console.log("Checkout Data:", checkoutData);
   };
 
