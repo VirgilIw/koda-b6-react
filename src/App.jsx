@@ -11,6 +11,7 @@ import MainLayout from "./layout/MainLayout";
 import DetailProduct from "./pages/DetailProduct";
 import Error from "./pages/Error";
 import CheckoutProduct from "./pages/CheckoutProduct";
+import HistoryOrder from "./pages/HistoryOrder";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "checkout-product/:id",
         element: <CheckoutProduct />,
+      },
+      {
+        path: "history-order",
+        element: <HistoryOrder />,
       },
       {
         path: "*",
